@@ -1,0 +1,456 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap"); 
+
+*,*::before,*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #121212;
+    --alt-color: #0078F2;
+    --text-color: #fff;
+    --light-text-color: #898989;
+    --border-color: #414141;
+    --time: 0.25s;
+    --header-height: 3rem;
+    --border-radius: 0.25em;
+    --spacing: 1rem
+}
+
+@media screen and (min-width: 640px) {
+    :root {
+        --spacing: 2rem
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    :root {
+        --spacing: 2.5rem
+    }
+}
+
+body, body #app {
+    display: flex;
+    min-height: 100vh;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2px;
+    width: 100%;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-weight: normal
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-left: var(--spacing);
+    margin-right: var(--spacing);
+    padding-top: var(--spacing);
+    max-width: 1200px
+}
+
+@media screen and (max-width: 640px) {
+    main {
+        padding-top:calc(var(--header-height) + var(--spacing))
+    }
+}
+
+@media screen and (min-width: 1482px) {
+    main {
+        margin-left:auto;
+        margin-right: auto
+    }
+}
+
+.game-card {
+    text-decoration: none;
+    color: var(--text-color)
+}
+
+.game-card:hover img {
+    opacity: 0.8
+}
+
+.game-card article>div {
+    background-color: white;
+    border-radius: var(--border-radius);
+    overflow: hidden
+}
+
+.game-card article>div img {
+    transition: opacity var(--time)
+}
+
+.game-card article>div {
+    position: relative;
+    padding-bottom: calc(4 / 3 * 100%);
+    margin-bottom: 1.25rem
+}
+
+.game-card img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+.game-card h3,.game-card p {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word
+}
+
+.game-card h3 {
+    margin-bottom: 0.25rem
+}
+
+.game-card p {
+    color: var(--light-text-color);
+    margin-bottom: 1rem
+}
+
+.game-card p:last-child {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0
+}
+
+.game-card footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 0.5rem
+}
+
+.game-card footer div {
+    padding: 0.5rem 0.75rem;
+    background: var(--alt-color);
+    border-radius: var(--border-radius);
+    font-size: 0.55rem
+}
+
+.game-card footer p {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    margin-bottom: 0
+}
+
+.game-card footer p del {
+    color: var(--light-text-color)
+}
+
+.game-card footer p span {
+    color: var(--text-color)
+}
+
+.game-card .jam {
+    font-size: 1.25rem
+}
+
+.library, .store, .settings, .home, .login, hr, .login form {
+    width: 100%;
+}
+
+.store main,.library main {
+    --grid: 1fr 1fr;
+    display: grid;
+    grid-template-columns: var(--grid);
+    gap: 1rem;
+}
+
+@media screen and (min-width: 800px) {
+    .store main,.library main {
+        --grid: repeat(4, 1fr)
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .store main,.library main {
+        --grid: repeat(5, 1fr)
+    }
+}
+
+label {
+    display: flex;
+    flex-direction: column
+}
+
+label span {
+    display: block;
+    margin-bottom: 0.35rem
+}
+
+input {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 0.75rem;
+    background: none;
+    caret-color: var(--text-color);
+    color: var(--text-color);
+}
+
+input:focus { 
+    color: var(--text-color);
+}
+
+input[type='submit'] {
+    border: none;
+    color: var(--text-color);
+    background: var(--alt-color);
+    cursor: pointer
+}
+
+input[type='submit']:hover {
+    transform: scale(1.01)
+}
+
+.settings form {
+    flex: none;
+    max-width: 800px;
+    display: grid;
+    gap: 1rem;
+    margin-left: auto;
+    margin-right: auto
+}
+
+@media screen and (min-width: 640px) {
+    .settings form {
+        grid-template-columns:1fr 1fr
+    }
+}
+
+.settings form h2 {
+    grid-column-start: span 2
+}
+
+.settings form h2:not(:first-of-type) {
+    padding-top: 1rem
+}
+
+.settings form input[type='submit'] {
+    grid-column-start: span 2
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    height: var(--header-height);
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1
+}
+
+@media screen and (min-width: 640px) {
+    .main-header {
+        display:none
+    }
+}
+
+.main-header img {
+    height: 1.75rem
+}
+
+.main-header .jam {
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 0.25rem
+}
+
+.main-menu {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    padding: 1rem 0;
+    height: 100vh;
+    width: 250px;
+    border-right: 1px solid var(--border-color)
+}
+
+@media screen and (max-width: 640px) {
+    .main-menu {
+        position:fixed;
+        height: calc(100vh - var(--header-height));
+        top: var(--header-height);
+        background: var(--bg-color);
+        transform: translateX(-100%);
+        transition: transform var(--time);
+        z-index: 1
+    }
+
+    .main-menu.active {
+        transform: initial
+    }
+}
+
+.main-menu header {
+    margin-bottom: 1rem
+}
+
+@media screen and (max-width: 640px) {
+    .main-menu header {
+        display:none
+    }
+}
+
+.main-menu a {
+    display: flex;
+    align-items: center;
+    padding: 1rem var(--spacing);
+    color: var(--text-color);
+    text-decoration: none
+}
+
+.main-menu img {
+    height: 2.5rem;
+    margin-right: 1rem
+}
+
+.main-menu nav {
+    display: flex;
+    flex-grow: 1
+}
+
+.main-menu nav a {
+    color: var(--light-text-color)
+}
+
+.main-menu nav a:hover {
+    color: var(--text-color);
+    transition: color var(--time)
+}
+
+.main-menu nav a.active {
+    color: var(--text-color)
+}
+
+.main-menu ul {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style: none
+}
+
+.main-menu li:last-of-type {
+    margin-top: auto
+}
+
+.main-menu .jam {
+    font-size: 1.5rem;
+    margin-right: 1rem
+}
+
+@media screen and (min-width: 640px) {
+    .main-menu .jam {
+        margin-right:2rem
+    }
+}
+
+.news-item {
+    text-decoration: none;
+    color: var(--text-color)
+}
+
+.news-item:hover span {
+    border-color: var(--text-color)
+}
+
+@media screen and (min-width: 640px) {
+    .news-item {
+        padding:1rem 0;
+        border-bottom: 1px solid var(--border-color)
+    }
+
+    .news-item:first-of-type {
+        padding-top: 0
+    }
+}
+
+@media screen and (min-width: 640px) {
+    .news-item article {
+        display:grid;
+        grid-template-columns: 200px 1fr;
+        gap: 1.15rem
+    }
+}
+
+.news-item div:first-of-type {
+    margin-bottom: 0.5rem
+}
+
+.news-item:hover img {
+    opacity: 0.8
+}
+
+.news-item div:first-of-type {
+    background-color: white;
+    border-radius: var(--border-radius);
+    overflow: hidden
+}
+
+.news-item div:first-of-type img {
+    transition: opacity var(--time)
+}
+
+.news-item img {
+    display: block;
+    width: 100%;
+    transition: opacity var(--time)
+}
+
+.news-item time {
+    display: block;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    color: var(--light-text-color)
+}
+
+.news-item p {
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word
+}
+
+.news-item span {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.25rem;
+    transition: border-color var(--time)
+}
+
+.login main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    max-width: 800px;
+}
+
+.login form {
+    display: grid;
+}
+
+.login main .form-group {
+    padding: 10px 0px;
+}

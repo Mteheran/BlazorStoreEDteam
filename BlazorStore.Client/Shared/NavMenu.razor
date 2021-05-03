@@ -1,29 +1,38 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">BlazorStore.Client</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
+﻿<header>
+    <a href="/">
+        <img src="/logo.svg">
+        <span>Epic Games</span>
+    </a>
+</header>
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
+<nav class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <ul>
+        <li>
+            <NavLink class="home" href="" Match="NavLinkMatch.All">
+                <span class="jam jam-home-f" aria-hidden="true"></span> 
+                <span>Inicio</span>
             </NavLink>
         </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+        <li>
+            <NavLink class="store" href="counter">
+                <span class="jam jam-tag-f" aria-hidden="true"></span> 
+                <span>Tienda</span>
             </NavLink>
         </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+        <li>
+            <NavLink class="library" href="fetchdata">
+                <span class="jam jam-grid-f" aria-hidden="true"></span>
+                <span>Biblioteca</span>
+            </NavLink>
+        </li>
+         <li>
+            <NavLink class="settings" href="fetchdata">
+                <span class="jam jam-cog-f" aria-hidden="true"></span>
+                <span>Ajustes</span>
             </NavLink>
         </li>
     </ul>
-</div>
+</nav>
 
 @code {
     private bool collapseNavMenu = true;
