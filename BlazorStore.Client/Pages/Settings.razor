@@ -1,0 +1,46 @@
+@page "/settings"
+
+<div class="settings">
+    <main> 
+        <EditForm Model="@userProfile" class="form">
+            <h2>Información básica</h2>
+            <div>
+                <label>
+                    <span>Nombre de usuario</span>
+                    <InputText class="form-control" @bind-Value="userProfile.UserName" placeholder="Nombre de usuario"></InputText>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <span>Correo Electronico</span>
+                    <InputText class="form-control" @bind-Value="userProfile.Email" placeholder="Correo"></InputText>
+                </label>
+            </div>
+            <h2>Datos Personales</h2>
+             <div>
+                <label>
+                    <span>Nombre</span>
+                    <InputText class="form-control" @bind-Value="userProfile.Name" placeholder="Nombre"></InputText>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <span>Apellido</span>
+                    <InputText class="form-control" @bind-Value="userProfile.LastName" placeholder="Apellido"></InputText>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <span>País</span>
+                    <InputText class="form-control" @bind-Value="userProfile.Country" placeholder="País"></InputText>
+                </label>
+            </div>
+        </EditForm>
+    </main>
+</div>
+
+@code
+{
+    UserProfile userProfile = new UserProfile();
+
+}

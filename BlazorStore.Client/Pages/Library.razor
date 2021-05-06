@@ -1,0 +1,44 @@
+@page "/library"
+
+<div class="library">
+    <main>
+        @if (gameList!=null && gameList.Count>0)
+        {
+            @foreach (var item in gameList)
+            {
+                <a class="game-card" href="#">
+                    <article>
+                        <div>
+                            <img src="@item.Image" />
+                        </div>
+                        <h3>@item.Title</h3>
+                        <p>
+                            <span class="jam jam-download"></span>
+                            <span>Descargar</span> 
+                        </p>
+                    </article>
+                </a>
+            }
+        }
+    </main>
+
+</div>
+
+
+
+@code
+{
+    List<Game> gameList = new List<Game>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        gameList.Add(new Game()
+        {
+            Title = "Resident Evil 3",
+            Image = "https://i.blogs.es/fc491f/300320-re3-review/450_1000.jpeg",
+            Description = "Resident Evil 3",
+            Price = 50,
+            DiscountRate = 0
+        });
+    }
+}

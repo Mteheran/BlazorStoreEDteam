@@ -1,0 +1,32 @@
+@page "/login"
+
+<div class="login">
+    <main>
+        <h1>Inicio de sesión</h1>
+        <hr>
+        <EditForm Model="@userLogin" class="form">
+            <div>
+                <label>
+                    <span>Nombre de usuario</span>
+                    <InputText class="form-control" @bind-Value="userLogin.User" placeholder="Nombre de usuario"></InputText>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <span>Contraseña</span>
+                    <InputText type="password" class="form-control" @bind-Value="userLogin.Password" placeholder="Contraseña"></InputText>
+                </label>
+            </div>
+
+        </EditForm>
+
+
+    </main>
+</div>
+
+
+@code
+{
+    UserLogin userLogin = new UserLogin();
+
+}
