@@ -1,4 +1,6 @@
-﻿<header>
+﻿@inject IAutheticationService auth
+
+<header>
     <a href="/">
         <img src="/logo.svg">
         <span>Epic Games</span>
@@ -25,6 +27,12 @@
                 <span>Biblioteca</span>
             </NavLink>
         </li>
+        <li>
+            <a class="settings" href="#" @onclick="Logout">
+                <span class="jam jam-close-rectangle" aria-hidden="true"></span>
+                <span>Salir</span>
+            </a>
+        </li>
          <li>
             <NavLink class="settings" href="settings">
                 <span class="jam jam-cog-f" aria-hidden="true"></span>
@@ -42,5 +50,10 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    public void Logout()
+    {
+        auth.Logout();
     }
 }
