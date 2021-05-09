@@ -11,9 +11,9 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-       defaults:
+    defaults:
       run:
-          working-directory: BlazorStore.Server
+        working-directory: webapi
 
     steps:
     # checkout the repo
