@@ -9,6 +9,9 @@ namespace BlazorStore.Server.Context
 {
     public class StoreContext : DbContext
     {
+
+        public StoreContext(DbContextOptions<StoreContext> options): base(options){ }
+
         public DbSet<News> News {get;set;}
         public DbSet<Game> Games {get;set;}
         public DbSet<UserProfile> UserProfiles {get;set;}
@@ -19,12 +22,12 @@ namespace BlazorStore.Server.Context
             base.OnModelCreating(builder);  
 
             builder.Entity<Game>().ToTable("Game").HasKey(p=> p.GameId); 
-            builder.Entity<UserProfile>().ToTable("Game").HasKey(p=> p.UserProfileId);
-            builder.Entity<UserGame>().ToTable("Game").HasKey(p=> p.UserGameId); 
+            builder.Entity<UserProfile>().ToTable("UserProfile").HasKey(p=> p.UserProfileId);
+            builder.Entity<UserGame>().ToTable("UserGame").HasKey(p=> p.UserGameId); 
             builder.Entity<News>().ToTable("News").HasKey(p=> p.NewsId);
 
-            builder.Entity<UserGame>().HasMany<Game>("Game");
-            builder.Entity<UserGame>().HasMany<UserProfile>("UserProfile");
+            //builder.Entity<UserGame>().HasMany<Game>("GameId");
+            //builder.Entity<UserGame>().HasMany<UserProfile>("UserProfileId");
         }
     }
 }
