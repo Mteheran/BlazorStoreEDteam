@@ -1,4 +1,6 @@
 @page "/library"
+@inject AuthenticationStateProvider auth
+@inject IHttpService service
 
 <div class="library">
     <main>
@@ -31,14 +33,9 @@
     List<Game> gameList = new List<Game>();
 
     protected override async Task OnInitializedAsync()
-    {
-        gameList.Add(new Game()
-        {
-            Title = "Resident Evil 3",
-            Image = "https://i.blogs.es/fc491f/300320-re3-review/450_1000.jpeg",
-            Description = "Resident Evil 3",
-            Price = 50,
-            DiscountRate = 0
-        });
+    { 
+       var userId = (await auth.GetAuthenticationStateAsync()).User?.Claims?.FirstOrDefault(p=> p.Type == System.Security.Claims.ClaimTypes.UserData)?.Value;
+    
+        gameList = await service.Get<List<Game>>($"usergame/GetGames/{userId}");
     }
 }

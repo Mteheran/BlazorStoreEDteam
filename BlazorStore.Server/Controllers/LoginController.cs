@@ -30,7 +30,7 @@ namespace BlazorStore.Server.Controllers
         {
             if(user.User == "user" && user.Password == "user")
             {
-                return tokeHelper.GenerateToken("user");
+                return tokeHelper.GenerateToken("user", Guid.NewGuid().ToString());
             }
             else
             {
@@ -38,7 +38,7 @@ namespace BlazorStore.Server.Controllers
 
                if(userProfile !=null )
                {
-                   return tokeHelper.GenerateToken(userProfile.UserName);
+                   return tokeHelper.GenerateToken(userProfile.UserName, userProfile.UserProfileId.ToString());
                }
             }
 

@@ -16,13 +16,14 @@ namespace BlazorStore.Server.Helpers
             this.secretKey = secretkey;
         }
 
-        public string GenerateToken(string userName)
+        public string GenerateToken(string userName, string userId)
         {
             DateTime utcNow = DateTime.UtcNow;
 
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, userName),
+                new Claim(ClaimTypes.UserData, userId),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, utcNow.ToString())
             };
