@@ -52,6 +52,13 @@ namespace BlazorStore.Client
             return await SendRequestString(request);
         }
 
+        public async Task<string> PutString(string uri, object value)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Put, uri);
+            request.Content = new StringContent(JsonSerializer.Serialize(value), Encoding.UTF8, "application/json");
+            return await SendRequestString(request);
+        }
+
         // helper methods
 
         private async Task<string> SendRequestString(HttpRequestMessage request)

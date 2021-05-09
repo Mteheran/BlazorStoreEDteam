@@ -1,8 +1,10 @@
 @page "/settings"
+@inject IHttpService service
+@inject AuthenticationStateProvider auth
 
 <div class="settings">
     <main> 
-        <EditForm Model="@userProfile" class="form">
+        <EditForm Model="@userProfile" class="form" OnSubmit="@HandleSubmit">
             <h2>Información básica</h2>
             <div>
                 <label>
@@ -35,6 +37,7 @@
                     <InputText class="form-control" @bind-Value="userProfile.Country" placeholder="País"></InputText>
                 </label>
             </div>
+            <input type="submit" value="Guardar" />
         </EditForm>
     </main>
 </div>
@@ -42,5 +45,19 @@
 @code
 {
     UserProfile userProfile = new UserProfile();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userId = (await auth.GetAuthenticationStateAsync()).User?.Claims?.FirstOrDefault(p=> p.Type == System.Security.Claims.ClaimTypes.UserData)?.Value;
+    
+        userProfile = await service.Get<UserProfile>($"userprofile/{userId}");
+    }
+
+    public async Task HandleSubmit()
+    {
+        var userId = (await auth.GetAuthenticationStateAsync()).User?.Claims?.FirstOrDefault(p=> p.Type == System.Security.Claims.ClaimTypes.UserData)?.Value;
+    
+        await service.PutString($"UserProfile/{userId}", userProfile);
+    }
 
 }
