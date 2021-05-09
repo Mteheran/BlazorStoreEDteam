@@ -1,5 +1,7 @@
 @page "/store"
+@inject AuthenticationStateProvider auth
 @inject IHttpService service
+@inject NavigationManager nav
 
 <div class="store">
     <main>
@@ -7,7 +9,7 @@
         {
             @foreach (var item in gameList)
             {
-                <a class="game-card" href="#">
+                <a class="game-card" href="#" @onclick="()=> BuyGame(item.GameId)">
                     <article>
                         <div>
                             <img src="@item.Image" />
@@ -44,5 +46,19 @@
     protected override async Task OnInitializedAsync()
     {
        gameList  = await service.Get<List<Game>>("game");
+    }
+
+    public async Task BuyGame(Guid GameId)
+    {
+        var userId = (await auth.GetAuthenticationStateAsync()).User?.Claims?.FirstOrDefault(p=> p.Type == System.Security.Claims.ClaimTypes.UserData)?.Value;
+
+        UserGame userGame = new UserGame();
+        userGame.UserGameId = Guid.NewGuid();
+        userGame.GameId = GameId;
+        userGame.UserProfileId = Guid.Parse(userId);
+
+        await service.PostString($"UserGame/", userGame);
+
+        nav.NavigateTo("/library");
     }
 }
