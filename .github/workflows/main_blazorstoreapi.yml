@@ -12,7 +12,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
        defaults:
-        run:
+      run:
           working-directory: BlazorStore.Server
 
     steps:
