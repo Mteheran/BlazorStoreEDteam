@@ -37,6 +37,8 @@ namespace BlazorStore.Server.Controllers
         {
             context.UserProfiles.Add(model);
 
+            context.SaveChanges();
+
             return model;
         }
 

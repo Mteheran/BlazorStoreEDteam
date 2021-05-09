@@ -35,6 +35,8 @@ namespace BlazorStore.Server.Controllers
         {
             context.UserGames.Add(model);
 
+            context.SaveChanges();
+
             return model;
         }
     }

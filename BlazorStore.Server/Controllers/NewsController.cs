@@ -30,6 +30,8 @@ namespace BlazorStore.Server.Controllers
         {
             context.News.Add(model);
 
+            context.SaveChanges();
+
             return model;
         }
     }
