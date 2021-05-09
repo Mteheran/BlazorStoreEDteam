@@ -1,4 +1,6 @@
 ﻿@page "/"
+@inject IHttpService service
+
 <div class="home">
 <main>
     @if(listNews != null && listNews.Count> 0)
@@ -27,13 +29,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-            listNews.Add(new News()
-             {
-                 Description = "RESIDENT EVIL VILLAGE HAS MORE GUNS BUT FEWER SCARES",
-                 Image = "https://cdn.vox-cdn.com/thumbor/_ooknw3BaUMEghPs5lvYqz81VWk=/0x0:3840x2160/1075x1075/filters:focal(1189x914:1803x1528):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/69240488/RE_Village_Apr_2021_Screens_05.0.jpg",
-                 Url = "https://www.theverge.com/22420738/resident-evil-village-review-playstation-xbox-pc"                 
-
-             });
+        listNews = await service.Get<List<News>>("news");
     }
 }
 

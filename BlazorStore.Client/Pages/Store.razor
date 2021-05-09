@@ -1,4 +1,5 @@
 @page "/store"
+@inject IHttpService service
 
 <div class="store">
     <main>
@@ -42,22 +43,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        gameList.Add(new Game()
-        {
-            Title = "Resident Evil 3",
-            Image = "https://i.blogs.es/fc491f/300320-re3-review/450_1000.jpeg",
-            Description = "Resident Evil 3",
-            Price = 50,
-            DiscountRate = 0
-        });
-
-        gameList.Add(new Game()
-        {
-            Title = "Hades",
-            Image = "https://i.3djuegos.com/juegos/16330/hades/fotos/maestras/hades-5231106.jpg",
-            Description = "Hades",
-            Price = 35,
-            DiscountRate = decimal.Parse("0.05")
-        });
+       gameList  = await service.Get<List<Game>>("game");
     }
 }
