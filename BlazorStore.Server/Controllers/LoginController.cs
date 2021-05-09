@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlazorStore.Server.Context;
 using BlazorStore.Server.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,9 +17,11 @@ namespace BlazorStore.Server.Controllers
     public class LoginController : ControllerBase
     {
         private readonly TokenHelper tokeHelper;
-        public LoginController(TokenHelper tokeHelper)
+        private StoreContext context;
+        public LoginController(TokenHelper tokeHelper, StoreContext context)
         {
             this.tokeHelper = tokeHelper;
+            this.context= context;
         }
         
         [AllowAnonymous]
@@ -27,7 +30,16 @@ namespace BlazorStore.Server.Controllers
         {
             if(user.User == "user" && user.Password == "user")
             {
-                return tokeHelper.GenerateToken();
+                return tokeHelper.GenerateToken("user");
+            }
+            else
+            {
+               var userProfile =  context.UserProfiles.FirstOrDefault(p=> p.UserName == user.User && p.Password == p.Password);
+
+               if(userProfile !=null )
+               {
+                   return tokeHelper.GenerateToken(userProfile.UserName);
+               }
             }
 
             return Unauthorized();

@@ -27,21 +27,40 @@ namespace BlazorStore.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<UserProfile> GetUserProfileById(int id)
+        public ActionResult<UserProfile> GetUserProfileById(string id)
         {
-            return null;
+            return context.UserProfiles.FirstOrDefault(p=> p.UserProfileId == Guid.Parse(id));
         }
 
         [HttpPost("")]
         public ActionResult<UserProfile> PostUserProfile(UserProfile model)
         {
-            return null;
+            context.UserProfiles.Add(model);
+
+            return model;
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutUserProfile(int id, UserProfile model)
+        public async Task<IActionResult> PutUserProfile(string id, UserProfile model)
         {
-            return NoContent();
+            var user = context.UserProfiles.FirstOrDefault(p=> p.UserProfileId == Guid.Parse(id));
+
+            if(user!=null)
+            {
+                user.Name = model.Name;
+                user.LastName = model.LastName;
+                user.Country = model.Country;
+                user.Email = model.Email;
+
+                await context.SaveChangesAsync();
+
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+
         }
 
         [HttpDelete("{id}")]
