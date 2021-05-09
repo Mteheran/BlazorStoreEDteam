@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlazorStore.Server.Context;
 using BlazorStore.Server.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -67,6 +69,9 @@ namespace BlazorStore.Server
                         .AllowAnyHeader()
                         .AllowCredentials();
             }));
+
+            services.AddDbContext<StoreContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("StoreCnx")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
