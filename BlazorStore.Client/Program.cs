@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using BlazorStore.Client.Services;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace BlazorStore.Client
 {
@@ -17,7 +19,17 @@ namespace BlazorStore.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddScoped<IHttpService, HttpService>()
+                            .AddScoped<ILocalStorageService, LocalStorageService>()
+                            .AddScoped<IAutheticationService, AuthenticationService>();
+
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationProvider>();
+
+            builder.Services.AddAuthorizationCore();
+
+            string apiUrl = builder.Configuration["apiUrl"];
+
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(apiUrl) });
 
             await builder.Build().RunAsync();
         }

@@ -1,10 +1,12 @@
 @page "/login"
+@inject IAutheticationService authService
+@inject NavigationManager nav
 
 <div class="login">
     <main>
         <h1>Inicio de sesión</h1>
         <hr>
-        <EditForm Model="@userLogin" class="form">
+        <EditForm Model="@userLogin" class="form" OnSubmit="@HandleLogin">
             <div>
                 <label>
                     <span>Nombre de usuario</span>
@@ -17,6 +19,13 @@
                     <InputText type="password" class="form-control" @bind-Value="userLogin.Password" placeholder="Contraseña"></InputText>
                 </label>
             </div>
+            
+            @if(!string.IsNullOrEmpty(ErrorLogin)) 
+            {
+                <div class="validation-message">@ErrorLogin</div>
+            }
+            
+            <input type="submit" class="btn btn-primary" value="Ingresar" />
 
         </EditForm>
 
@@ -28,5 +37,22 @@
 @code
 {
     UserLogin userLogin = new UserLogin();
+
+    public string ErrorLogin = "";
+
+    private async Task HandleLogin()
+    {
+        var result = await authService.Login(userLogin);
+
+        if(result)
+        {
+            nav.NavigateTo("/");
+        }
+        else
+        {
+            ErrorLogin = "Usuario o Password Incorrecto";
+        }
+
+    }
 
 }
