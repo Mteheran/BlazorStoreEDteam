@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject IHttpService service
+@inject ILogger<Index> logger
 
 <div class="home">
 <main>
@@ -29,7 +30,9 @@
 
     protected override async Task OnInitializedAsync()
     {
+        logger.LogInformation("Getting news..");
         listNews = await service.Get<List<News>>("news");
+        logger.LogInformation("News set");
     }
 }
 

@@ -17,6 +17,9 @@ namespace BlazorStore.Client
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+            builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped<IHttpService, HttpService>()
